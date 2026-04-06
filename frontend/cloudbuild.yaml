@@ -1,0 +1,14 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      [
+        'build',
+        '-t',
+        'us-central1-docker.pkg.dev/patchpilot-v2/patchpilot-repo/patchpilot-frontend:v1',
+        '--build-arg',
+        'NEXT_PUBLIC_API_URL=https://patchpilot-backend-35y4wrt27a-uc.a.run.app',
+        '.'
+      ]
+
+images:
+  - 'us-central1-docker.pkg.dev/patchpilot-v2/patchpilot-repo/patchpilot-frontend:v1'
