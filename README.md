@@ -129,3 +129,13 @@ curl -X POST $BACKEND_URL/api/alerts/simulate \
 ## License
 
 MIT
+
+--- 
+
+## 👥 Team 
+
+Built with ❤️ for the *Google Gen AI Hackathon* 
+
+--- 
+
+PatchPilot — Because the best on-call engineer is one that never sleeps.
