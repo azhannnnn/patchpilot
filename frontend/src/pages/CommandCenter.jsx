@@ -34,12 +34,6 @@ const HUMAN_APPROVED_STATUSES = new Set(['resolved'])
  * @param {Array}    incidents  - Current incident list from the API
  * @returns {{ is_repeat: boolean, has_approved_strategy: boolean }}
  *
- * Rules
- * ─────
- * is_repeat            → at least one prior incident exists for this alert type
- * has_approved_strategy→ at least one of those prior incidents was explicitly
- *                        approved by a human (status === 'resolved').
- *                        auto_resolved does NOT count.
  *
  * The backend should only auto-resolve when BOTH flags are true.
  */
@@ -94,17 +88,6 @@ export default function CommandCenter({ onNav }) {
     try {
       let i=0
       const timer = setInterval(() => { i++; setPipeIdx(i); if(i>=PIPELINE.length-1) clearInterval(timer) }, 600)
-
-      // ── Auto-resolve gate ────────────────────────────────────────────────────
-      // Compute the two preconditions from local incident history and pass them
-      // to the backend so it can make the correct auto-resolve decision:
-      //   • is_repeat            — same alert type has fired before
-      //   • has_approved_strategy— a human explicitly approved the fix before
-      //
-      // The backend MUST require both to be true before auto-resolving.
-      // Passing these from the frontend keeps the gate logic transparent and
-      // testable; the backend should treat them as advisory signals and apply
-      // its own validation (e.g. checking memory/DB), not trust them blindly.
       const autoResolveFlags = deriveAutoResolveFlags(selected, incidents)
 
       const r = await simulateAlert(selected, autoResolveFlags)
