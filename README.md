@@ -128,7 +128,11 @@ curl -X POST $BACKEND_URL/api/alerts/simulate \
 
 ## License
 
-MIT
+This project is licensed under the MIT License.
+
+Copyright (c) 2026 Azhan Khan
+
+See the LICENSE file for full details.
 
 --- 
 
